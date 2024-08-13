@@ -1,4 +1,5 @@
 import React from "react";
+import "./card.css";
 
 const products = [
   {
@@ -33,15 +34,14 @@ const products = [
   },
 ];
 
-
 const Card = () => {
   return (
     <div className="products">
       {products.map((product) => (
         <div key={product.id} className="product">
+          <img src={product.image} alt={`Imagem de ${product.name}`} />
           <p>{product.name}</p>
           <p>{product.price}</p>
-          <img src={product.image} alt={`Imagem de ${product.name}`} />
         </div>
       ))}
     </div>
