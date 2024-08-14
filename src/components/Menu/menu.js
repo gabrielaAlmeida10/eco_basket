@@ -1,30 +1,18 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import "./menu.css";
 
 const Menu = () => {
   return (
-    <header>
-      <nav>
-        <ul class="menu">
-          <li class="menu-item active">
-            <a href="index.html">Início</a>
-          </li>
-          <li class="menu-item">
-            <a href="produtos.html">Produtos</a>
-          </li>
-        </ul>
-        <ul class="menu right-menu">
-          <li class="menu-item">
-            <a href="pedidos.html">
-              <img src="images/carrinho.png" alt="Fazer Pedido" />
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="cadastroConsum.html">
-              <button>Cadastro</button>
-            </a>
-          </li>
-        </ul>
-      </nav>
+    <header id="main-header">
+      <div className="header-content">
+        <Link to="/home">
+          <h1>Home</h1>
+        </Link>
+        <Link to="/products">
+          <h3>Produtos</h3>
+        </Link>
+      </div>
     </header>
   );
 };

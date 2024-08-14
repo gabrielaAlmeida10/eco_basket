@@ -39,6 +39,7 @@ const Card = () => {
     <div className="products">
       {products.map((product) => (
         <div key={product.id} className="product">
+          {/* <img src="../../images/tomate.jpg" alt={`Imagem de ${product.name}`} /> */}
           <img src={product.image} alt={`Imagem de ${product.name}`} />
           <p>{product.name}</p>
           <p>{product.price}</p>
