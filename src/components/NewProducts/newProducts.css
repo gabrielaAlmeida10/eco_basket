@@ -1,0 +1,97 @@
+/* Estilo geral do formulário */
+.formProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo dos inputs */
+.formProducts input[type="text"],
+.formProducts input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.formProducts input[type="text"]:focus,
+.formProducts input[type="number"]:focus {
+  border-color: #4CAF50;
+}
+
+/* Estilo do botão de submit */
+.formProducts input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.formProducts input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Overlay que cobre a página */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Botão de fechar */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #FF6347;
+}
+
+/* Estilo do formulário já definido anteriormente */
+.formProducts {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
