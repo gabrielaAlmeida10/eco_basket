@@ -7,10 +7,10 @@ const Menu = () => {
     <header id="main-header">
       <div className="header-content">
         <Link to="/home">
-          <h1>Home</h1>
+          <h3>Home</h3>
         </Link>
-        <Link to="/products">
-          <h3>Produtos</h3>
+        <Link to="/products" className="left-menu">
+          <h3 >Produtos</h3>
         </Link>
       </div>
     </header>
