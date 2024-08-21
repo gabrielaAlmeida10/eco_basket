@@ -5,13 +5,13 @@ import "./newOrder.css";
 const NewOrder = () => {
   return (
     <div>
-      <div class="container">
+      <div className="container">
         <h1>Cadastro de Pedidos</h1>
         <form id="orderForm">
           <label for="customerName">Nome do Cliente:</label>
           <input type="text" id="customerName" name="customerName" required />
 
-          <div class="product-selection">
+          <div className="product-selection">
             <label for="product">Produto:</label>
             <select id="product" name="product">
               <option value="produto1">Produto 1</option>
@@ -21,7 +21,7 @@ const NewOrder = () => {
             </select>
             <button
               type="button"
-              class="add-product-btn"
+              className="add-product-btn"
               onclick="adicionarProduto()"
             >
               Adicionar Produto
