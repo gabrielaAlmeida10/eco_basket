@@ -14,12 +14,12 @@ const Menu = () => {
           <Link to="/products">
             <h3>Produtos</h3>
           </Link>
-          {/* <Link to="/newOrder">
-            <h3>Novo Pedido</h3>
-          </Link> */}
         </div>
         <Link to='/cart' className="right-menu">
           <img src={carrinho} alt="Cart" />
+        </Link>
+        <Link to='/authPage' className="menu-button">
+         <button>Login</button>
         </Link>
       </div>
     </header>
