@@ -10,15 +10,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
-/* Estilo para o link "Produtos" à esquerda */
 .header-content .left-menu {
   display: flex;
   align-items: center;
 }
 
-/* Estilo para os links no menu */
+.header-content .right-menu {
+  margin-left: auto; /* Empurra o carrinho para a direita */
+  display: flex;
+  align-items: center;
+}
+
 .header-content a {
   text-decoration: none;
   color: #fff;
@@ -26,21 +31,13 @@
   font-weight: bold;
 }
 
-/* Estilo do hover nos links */
 .header-content a:hover {
   color: #ff6600;
 }
 
-/* Estilo para o carrinho e o login/cadastro à direita */
-.header-content .right-menu {
-  display: flex;
-  align-items: center;
-}
-
 .header-content .right-menu img {
-  max-width: 40px;
-  height: auto;
-  margin-right: 20px;
+  width: 30px;
+  height: 30px;
 }
 
 /* Responsividade para o menu */
