@@ -21,7 +21,6 @@ const Products = () => {
       {showProducts && <NewProducts onClose={handleCloseModal} />}
       <div className="cards-container">
         <Card />
-        {/* Adicione mais <Card /> conforme necessário */}
       </div>
     </div>
   );
