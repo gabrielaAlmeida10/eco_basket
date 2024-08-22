@@ -1,18 +1,18 @@
+// src/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore"; // Se estiver usando Firestore
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCyuXUdufYsi36HlunlXcjgbnXnNcTOHyg",
-  authDomain: "ecobasket-36c62.firebaseapp.com",
-  projectId: "ecobasket-36c62",
-  storageBucket: "ecobasket-36c62.appspot.com",
-  messagingSenderId: "348931516716",
-  appId: "1:348931516716:web:3274207124dcd699ea2489",
-  measurementId: "G-3RM66111KS"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-
-
+export const db = getFirestore(app); // Se estiver usando Firestore
 export default app;
