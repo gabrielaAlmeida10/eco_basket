@@ -1,18 +1,20 @@
-// src/components/AuthPage/AuthPage.js
 import React, { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import "./authPage.css";
 
 const AuthPage = () => {
   const auth = getAuth();
   const storage = getStorage();
+  const db = getFirestore(); // Firestore para salvar os dados do usuário
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [message, setMessage] = useState(""); // Adiciona o estado para a mensagem
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -21,19 +23,25 @@ const AuthPage = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      let photoURL = "";
       if (photo) {
         const photoRef = ref(storage, `photos/${user.uid}`);
         await uploadBytes(photoRef, photo);
-        const photoURL = await getDownloadURL(photoRef);
-
-        // Aqui você pode salvar o URL da foto e o endereço no banco de dados, se necessário
-        console.log("URL da foto:", photoURL);
+        photoURL = await getDownloadURL(photoRef);
       }
 
-      console.log("Cadastro realizado com sucesso!");
+      // Salvar os dados do usuário no Firestore
+      await setDoc(doc(db, "users", user.uid), {
+        name: name,
+        email: email,
+        address: address,
+        photoURL: photoURL,
+      });
+
+      setMessage("Cadastro realizado com sucesso!");
       navigate("/home"); // Redirecionar para a página home após cadastro
     } catch (error) {
-      console.error("Erro no cadastro:", error.message);
+      setMessage(`Erro no cadastro: ${error.message}`);
     }
   };
 
@@ -86,6 +94,7 @@ const AuthPage = () => {
             onChange={(e) => setPhoto(e.target.files[0])}
           />
           <button type="submit">Cadastrar</button>
+          {message && <p className="message">{message}</p>}
         </form>
       </div>
     </div>

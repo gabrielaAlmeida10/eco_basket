@@ -19,7 +19,7 @@ const Menu = () => {
           <img src={carrinho} alt="Cart" />
         </Link>
         <Link to='/authPage' className="menu-button">
-         <button>Login</button>
+         <button>Cadastro</button>
         </Link>
       </div>
     </header>
