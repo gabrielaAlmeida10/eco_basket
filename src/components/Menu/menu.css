@@ -1,56 +1,84 @@
-header {
+#main-header {
+  display: flex;
   background-color: rgba(51, 51, 51, 0.81);
-  color: #fff;
   padding: 10px 20px;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-nav {
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
 }
 
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.header-content .left-menu {
+  display: flex;
+  align-items: center;
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 20px;
+.header-content .right-menu {
+  margin-left: auto; /* Empurra o carrinho para a direita */
+  display: flex;
+  align-items: center;
 }
 
-nav ul li a {
+.header-content a {
   text-decoration: none;
   color: #fff;
+  margin-right: 20px;
   font-weight: bold;
 }
 
-nav ul li a:hover {
+.header-content a:hover {
   color: #ff6600;
 }
-.menu {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
+
+.header-content .right-menu img {
+  width: 30px;
+  height: 30px;
 }
 
-.menu-item {
-  margin-right: 20px;
+.menu-button {
+  padding: 10px 20px;
+  background-color: #007bff; /* Cor de fundo */
+  color: #fff; /* Cor do texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-transform: uppercase; /* Texto em maiúsculas */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições para hover */
 }
 
-.menu-item:last-child {
-  margin-right: 0;
+.menu-button:hover {
+  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
 }
 
-.right-menu {
-  margin-left: auto;
+.menu-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Sombra ao focar no botão */
 }
 
-.menu-item img {
-  max-width: 40px;
-  height: auto;
+/* Responsividade para o menu */
+@media (max-width: 768px) {
+  #main-header {
+    padding: 10px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-content a {
+    margin-bottom: 10px;
+  }
+
+  .header-content a:last-child {
+    margin-right: 0;
+  }
 }

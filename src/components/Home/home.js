@@ -4,7 +4,7 @@ import Card from "../Card/card";
 const Home = () => {
   return (
     <main>
-      <section class="apresentacao">
+      <section className="apresentacao">
         <h1>Bem-vindo à Cooperativa de Produtos Orgânicos</h1>
         <p>
           Somos uma cooperativa comprometida em fornecer produtos orgânicos
@@ -15,7 +15,7 @@ const Home = () => {
       </section>
 
       <h2>Alguns de nossos produtos</h2>
-      <section class="produtos">
+      <section className="produtos">
         <Card />
       </section>
     </main>
