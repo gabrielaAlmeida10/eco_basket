@@ -4,15 +4,19 @@ import Footer from "./components/Footer/footer";
 import Menu from "./components/Menu/menu";
 import Routes from "./routes";
 import { BrowserRouter } from "react-router-dom";
-import './firebase/firebaseConfig'; // Importa o arquivo firebase para garantir que o Firebase seja inicializado
+import './firebase/firebaseConfig'; 
 
 function App() {
   return (
-    <BrowserRouter>
-      <Menu />
-      <Routes />
-      <Footer />
-    </BrowserRouter>
+    <div className="app-container">
+      <BrowserRouter>
+        <Menu />
+        <div className="main-content">
+          <Routes />
+        </div>
+        <Footer className='footer'/>
+      </BrowserRouter>
+    </div>
   );
 }
 
