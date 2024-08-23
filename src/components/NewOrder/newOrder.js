@@ -48,7 +48,7 @@ const NewOrder = () => {
           </table>
           <label>Data do Pedido:</label>
           <input type="date" id="orderDate" name="orderDate" required />
-          <button type="submit" onClick={cadastrarPedido()}>
+          <button type="submit" className="saveOrder"  onClick={cadastrarPedido()}>
             Cadastrar Pedido
           </button>
         </form>
