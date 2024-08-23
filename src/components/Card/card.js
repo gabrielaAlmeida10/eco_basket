@@ -1,48 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import "./card.css";
 
-const products = [
-  {
-    id: "1",
-    name: "Alface",
-    price: "R$ 2,00",
-    image: "../../images/alface.jpg",
-  },
-  {
-    id: "2",
-    name: "Maçã",
-    price: "R$ 3,50",
-    image: "../../images/maca.jpg",
-  },
-  {
-    id: "3",
-    name: "Goiaba",
-    price: "R$ 4,99",
-    image: "../../images/goiaba.jpg",
-  },
-  {
-    id: "4",
-    name: "Rúcula",
-    price: "R$ 4,00",
-    image: "../../images/rucula.jpg",
-  },
-  {
-    id: "5",
-    name: "Tomate",
-    price: "R$ 4,00",
-    image: "../../images/tomate.jpg",
-  },
-];
-
 const Card = () => {
+  const [products, setProducts] = useState([]);
+  const db = getFirestore();
+  const storage = getStorage();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Referência à coleção de produtos no Firestore
+        const productsCollection = collection(db, "products");
+        const productsSnapshot = await getDocs(productsCollection);
+        const productsList = productsSnapshot.docs.map((doc) => doc.data());
+
+        // Atualiza o estado com os produtos
+        setProducts(productsList);
+      } catch (error) {
+        console.error("Erro ao buscar produtos:", error.message);
+      }
+    };
+
+    fetchProducts();
+  }, [db]);
+
   return (
     <div className="products">
       {products.map((product) => (
-        <div key={product.id} className="product">
-          {/* <img src="../../images/tomate.jpg" alt={`Imagem de ${product.name}`} /> */}
-          <img src={product.image} alt={`Imagem de ${product.name}`} />
+        <div key={product.name} className="product">
+          {/* Renderiza a imagem do produto */}
+          {product.imageURL ? (
+            <img
+              src={product.imageURL}
+              alt={`Imagem de ${product.name}`}
+              className="product-image"
+            />
+          ) : (
+            <div className="no-image">Imagem não disponível</div>
+          )}
           <p>{product.name}</p>
-          <p>{product.price}</p>
+          <p>{`R$ ${product.price.toFixed(2)}`}</p>
         </div>
       ))}
     </div>
