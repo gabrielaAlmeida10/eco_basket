@@ -3,16 +3,25 @@ import React from "react";
 import "./newOrder.css";
 
 const NewOrder = () => {
+
+  const cadastrarPedido = () => {
+    console.log('pedido cadastrado');
+  }
+
+  const adicionarProduto = () => {
+    console.log('produto selecionado!');
+  }
+
   return (
     <div>
       <div className="container">
         <h1>Cadastro de Pedidos</h1>
         <form id="orderForm">
-          <label for="customerName">Nome do Cliente:</label>
+          <label>Nome do Cliente:</label>
           <input type="text" id="customerName" name="customerName" required />
 
           <div className="product-selection">
-            <label for="product">Produto:</label>
+            <label>Produto:</label>
             <select id="product" name="product">
               <option value="produto1">Produto 1</option>
               <option value="produto2">Produto 2</option>
@@ -22,7 +31,7 @@ const NewOrder = () => {
             <button
               type="button"
               className="add-product-btn"
-              onclick="adicionarProduto()"
+              onClick={adicionarProduto()}
             >
               Adicionar Produto
             </button>
@@ -37,9 +46,9 @@ const NewOrder = () => {
             </thead>
             <tbody id="productTableBody"></tbody>
           </table>
-          <label for="orderDate">Data do Pedido:</label>
+          <label>Data do Pedido:</label>
           <input type="date" id="orderDate" name="orderDate" required />
-          <button type="submit" onclick="cadastrarPedido(event)">
+          <button type="submit" onClick={cadastrarPedido()}>
             Cadastrar Pedido
           </button>
         </form>
