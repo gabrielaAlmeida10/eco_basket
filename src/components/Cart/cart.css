@@ -32,7 +32,7 @@
 
 .open-modal-btn {
   padding: 15px 25px;
-  background-color: #28a745;
+  background-color: rgb(255, 140, 0);
   color: white;
   border: none;
   border-radius: 5px;
@@ -46,7 +46,7 @@
 }
 
 .open-modal-btn:hover {
-  background-color: #218838;
+  background-color: rgb(255, 115, 0);
 }
 
 /* Restante do CSS da página */

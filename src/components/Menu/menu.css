@@ -1,7 +1,8 @@
+/* Estilo principal do menu */
 #main-header {
   display: flex;
-  background-color: rgba(51, 51, 51, 0.81);
-  padding: 10px 20px;
+  background-color: rgb(34, 139, 34);
+  padding: 8px 20px; /* Reduzido o padding para ajustar a altura */
   color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -13,15 +14,14 @@
   width: 100%;
 }
 
-.header-content .left-menu {
+.header-content .left-menu,
+.header-content .right-menu {
   display: flex;
   align-items: center;
 }
 
 .header-content .right-menu {
-  margin-left: auto; /* Empurra o carrinho para a direita */
-  display: flex;
-  align-items: center;
+  margin-left: auto;
 }
 
 .header-content a {
@@ -29,10 +29,11 @@
   color: #fff;
   margin-right: 20px;
   font-weight: bold;
+  white-space: nowrap; /* Previne que o texto quebre em linhas menores */
 }
 
 .header-content a:hover {
-  color: #ff6600;
+  color: rgb(144, 238, 144);
 }
 
 .header-content .right-menu img {
@@ -41,44 +42,59 @@
 }
 
 .menu-button {
-  padding: 10px 20px;
-  background-color: #007bff; /* Cor de fundo */
-  color: #fff; /* Cor do texto */
+  padding: 8px 16px; /* Ajusta o padding dos botões para reduzir altura */
+  background-color: rgb(255, 140, 0);
+  color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  text-transform: uppercase; /* Texto em maiúsculas */
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições para hover */
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .menu-button:hover {
-  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
-  transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+  background-color: rgb(255, 165, 0);
+  transform: scale(1.05);
 }
 
 .menu-button:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5); /* Sombra ao focar no botão */
+  box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.5);
 }
+
+.cart-icon {
+  width: 50px; /* Ajuste o tamanho conforme necessário */
+  height: 50px;
+  transition: filter 0.3s ease; /* Transição suave para a alteração de cor */
+}
+
+.cart-icon:hover {
+  filter: brightness(0) saturate(100%) invert(75%) sepia(81%) saturate(4595%) hue-rotate(0deg) brightness(102%) contrast(101%);
+}
+
 
 /* Responsividade para o menu */
 @media (max-width: 768px) {
   #main-header {
+    flex-direction: column; /* Alinha verticalmente o menu em telas pequenas */
+    align-items: flex-start;
     padding: 10px;
   }
 
   .header-content {
-    flex-direction: column;
+    flex-direction: column; /* Alinha verticalmente o conteúdo em telas pequenas */
     align-items: flex-start;
+    width: 100%;
   }
 
   .header-content a {
-    margin-bottom: 10px;
+    margin-right: 0; /* Remove a margem direita */
+    margin-bottom: 10px; /* Adiciona espaço inferior */
   }
 
-  .header-content a:last-child {
-    margin-right: 0;
+  .header-content .right-menu {
+    margin-left: 0; /* Remove a margem esquerda do menu direito */
+    margin-top: 10px; /* Espaço entre os menus na visualização móvel */
   }
 }

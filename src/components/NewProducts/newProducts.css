@@ -1,4 +1,3 @@
-/* Estilo geral do formulário */
 .formProducts {
   display: flex;
   flex-direction: column;
@@ -11,7 +10,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo dos inputs */
+
 .formProducts input[type="text"],
 .formProducts input[type="number"] {
   width: 100%;
@@ -23,14 +22,11 @@
   transition: border-color 0.3s ease;
 }
 
-.formProducts input[type="text"]:focus,
-.formProducts input[type="number"]:focus {
-  border-color: #4CAF50;
-}
+
 
 /* Estilo do botão de submit */
 .formProducts input[type="submit"] {
-  background-color: #4CAF50;
+  background-color: rgb(255, 140, 0);
   color: white;
   padding: 10px 20px;
   font-size: 1em;
@@ -41,10 +37,9 @@
 }
 
 .formProducts input[type="submit"]:hover {
-  background-color: #45a049;
+  background-color: rgb(255, 94, 0);
 }
 
-/* Overlay que cobre a página */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -58,7 +53,7 @@
   z-index: 1000;
 }
 
-/* Conteúdo do modal */
+
 .modal-content {
   background-color: #fff;
   padding: 20px;
@@ -69,7 +64,7 @@
   width: 100%;
 }
 
-/* Botão de fechar */
+
 .close-button {
   position: absolute;
   top: 10px;
@@ -78,15 +73,15 @@
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  color: #e71010;
   transition: color 0.3s ease;
 }
 
-.close-button:hover {
-  color: #FF6347;
+.close-button:hover{
+  color: #c21010;
 }
 
-/* Estilo do formulário já definido anteriormente */
+
 .formProducts {
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./menu.css";
-import carrinho from '../../images/carrinho.png';
+import carrinho from '../../images/carrinho.svg';
 
 const Menu = () => {
   return (
@@ -16,10 +16,10 @@ const Menu = () => {
           </Link>
         </div>
         <Link to='/cart' className="right-menu">
-          <img src={carrinho} alt="Cart" />
+          <img src={carrinho} alt="Cart" className="cart-icon" />
         </Link>
-        <Link to='/authPage' className="menu-button">
-         <button>Login</button>
+        <Link to='/authPage' >
+         <button className="menu-button">Cadastro</button>
         </Link>
       </div>
     </header>
