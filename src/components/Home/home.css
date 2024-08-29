@@ -5,14 +5,14 @@
 
 .apresentacao h1 {
   font-size: 2.5rem;
+  margin-bottom: 15px; /* Ajuste a margem inferior para separar do parágrafo */
 }
 
 .apresentacao p {
   font-size: 1.2rem;
   line-height: 1.5;
+  margin-bottom: 30px; /* Adicione margem inferior para separar do conteúdo abaixo */
 }
-
-
 
 h2 {
   font-size: 1.8rem;
@@ -20,3 +20,12 @@ h2 {
   text-align: center;
 }
 
+/* Ajustes para os botões */
+.add-product-button {
+  margin: 15px 0; /* Adiciona margem vertical para separar os botões de outros elementos */
+}
+
+/* Se houver botões adicionais, você pode usar uma classe mais geral ou específica */
+button {
+  margin: 10px; /* Adiciona margem geral aos botões, ajustável conforme necessário */
+}
