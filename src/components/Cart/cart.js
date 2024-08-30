@@ -4,12 +4,13 @@ import { getFirestore, collection, getDocs, query, where, doc, getDoc, updateDoc
 import { useNavigate } from "react-router-dom";
 import "./cart.css";
 
-const DELIVERY_FEE = 10.00; // Defina a taxa de entrega aqui
+const DELIVERY_FEE = 15.00; // Defina a taxa de entrega aqui
 
 const Cart = () => {
   const [orders, setOrders] = useState([]);
   const [userRole, setUserRole] = useState("");
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null); // Novo estado para o usuário
 
   const auth = getAuth();
   const db = getFirestore();
@@ -22,19 +23,21 @@ const Cart = () => {
         setUserRole(userDoc.data().role);
       } else {
         console.error("Documento do usuário não encontrado.");
+        setUserRole(""); // Caso não exista o documento, redefina para vazio
       }
     } catch (error) {
       console.error("Erro ao buscar o papel do usuário:", error);
+      setUserRole(""); // Em caso de erro, redefina para vazio
     }
   };
 
-  const fetchOrders = async (user) => {
+  const fetchOrders = async (currentUser) => {
     try {
       let ordersQuery;
       if (userRole === "admin") {
-        ordersQuery = query(collection(db, "orders"), where("status", "==", "pago"));
+        ordersQuery = query(collection(db, "orders"));
       } else {
-        ordersQuery = query(collection(db, "orders"), where("customerName", "==", user.displayName));
+        ordersQuery = query(collection(db, "orders"), where("customerName", "==", currentUser.displayName));
       }
       const querySnapshot = await getDocs(ordersQuery);
       const fetchedOrders = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -46,11 +49,12 @@ const Cart = () => {
     }
   };
 
+  // Primeiro useEffect para definir o usuário e buscar o papel
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        await fetchUserRole(user);
-        await fetchOrders(user);
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser); // Define o estado do usuário
+        await fetchUserRole(currentUser);
       } else {
         console.log("Nenhum usuário logado");
         setLoading(false);
@@ -58,7 +62,14 @@ const Cart = () => {
     });
 
     return () => unsubscribe();
-  }, [auth, db, userRole]);
+  }, [auth, db]);
+
+  // Segundo useEffect para buscar pedidos após o papel ser definido
+  useEffect(() => {
+    if (user && userRole) {
+      fetchOrders(user);
+    }
+  }, [user, userRole, db]);
 
   const handleStatusChange = async (orderId, newStatus) => {
     try {
