@@ -1,9 +1,21 @@
-import React from "react";
+// src/components/Home.jsx
+import React, { useState, useEffect } from "react";
 import Card from "../Card/card";
-
+import { getAuth } from "firebase/auth";
 import './home.css';
 
 const Home = () => {
+  const [user, setUser] = useState(null);
+  const auth = getAuth();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, [auth]);
+
   return (
     <main>
       <section className="apresentacao">
@@ -15,11 +27,15 @@ const Home = () => {
           produto que oferecemos.
         </p>
       </section>
-
-      <h2>Alguns de nossos produtos</h2>
-      <section className="produtos">
-        <Card />
-      </section>
+    
+      {user && (
+        <>
+          <h2>Alguns de nossos produtos</h2>
+          <section className="produtos">
+            <Card />
+          </section>
+        </>
+      )}
     </main>
   );
 };

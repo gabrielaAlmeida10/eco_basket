@@ -1,0 +1,66 @@
+/* Estilização da página de resumo do pedido */
+.order-summary-page {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+.order-details {
+  margin-bottom: 20px;
+}
+
+.order-details p {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.delivery-fee {
+  margin-top: 20px;
+}
+
+.payment-proof {
+  margin-top: 20px;
+}
+
+.submit-order {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+  display: block;
+  margin: 20px auto;
+}
+
+.submit-order:hover {
+  background-color: #218838;
+}
+
+.message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
