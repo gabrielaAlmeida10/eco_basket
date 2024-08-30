@@ -1,97 +1,20 @@
-.container {
-  width: 90%;
-  max-width: 600px;
-  margin: 40px auto;
-  background: #fff;
-  padding: 30px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-.product-selection {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-#product {
-  flex-grow: 1;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.add-product-btn {
-  padding: 5px 10px;
-  background-color:rgb(255, 140, 0);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.add-product-btn img {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
-}
-
-.add-product-btn:hover {
-  background-color: rgb(255, 115, 0);
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 10px;
-}
-
-table,
-th,
-td {
-  border: 1px solid #ddd;
-}
-
-th,
-td {
-  padding: 8px;
-  text-align: left;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-td button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-}
-
-td button img {
-  width: 16px;
-  height: 16px;
-}
-
-td button.edit-btn img {
-  filter: hue-rotate(180deg); 
+/* Estilização da página de novo pedido */
+.new-order-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
-  font-size: 24px;
+  margin-bottom: 20px;
+  font-size: 2em;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
 label {
@@ -103,27 +26,103 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-textarea {
-  margin-bottom: 20px;
-  padding: 12px;
+select {
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size: 16px;
+  margin-bottom: 10px;
 }
 
-.saveOrder {
-  padding: 12px;
-  background-color: rgb(255, 140, 0);
-  color: white;
+.product-selection {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.add-product-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
   border: none;
-  border-radius: 5px;
-  font-size: 18px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.saveOrder:hover{
-  background-color: rgb(255, 94, 0);
+.add-product-btn:hover {
+  background-color: #218838;
+}
+
+#productTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+#productTable th,
+#productTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#productTable th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.message {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+.proceed-summary {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+  align-self: center;
+}
+
+.proceed-summary:hover {
+  background-color: #0056b3;
 }
 
 
+.icon {
+  width: 20px;  /* Ajuste a largura conforme necessário */
+  height: 20px; /* Ajuste a altura conforme necessário */
+}
+
+.delete-button {
+  background: none;   /* Remove o fundo padrão */
+  border: none;       /* Remove a borda padrão */
+  cursor: pointer;    /* Mostra o cursor pointer ao passar o mouse */
+  padding: 0;         /* Remove qualquer preenchimento interno */
+  display: inline-flex; /* Garante que o ícone fique alinhado como inline-flex */
+  align-items: center;  /* Centraliza verticalmente o conteúdo */
+  justify-content: center; /* Centraliza horizontalmente o conteúdo */
+}
+
+.icon {
+  width: 20px;        /* Defina o tamanho desejado do ícone */
+  height: 20px;
+  transition: color 0.3s, transform 0.3s; /* Adiciona transições suaves para o hover */
+}
+
+.icon:hover {
+  filter: brightness(0) saturate(100%) invert(15%) sepia(86%) saturate(6841%) hue-rotate(360deg) brightness(102%) contrast(117%);
+  transform: scale(1.1); /* Aumenta ligeiramente o tamanho do ícone ao passar o mouse */
+}
+
+/* Media Query para tamanhos de tela menores */
+@media (max-width: 768px) {
+  .icon {
+    width: 16px;     /* Ajusta o tamanho do ícone para telas menores */
+    height: 16px;
+  }
+}

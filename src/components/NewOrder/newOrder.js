@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getFirestore, collection, getDocs, addDoc } from "firebase/firestore";
-import "./newOrder.css";
+
+import trashIcon from '../../images/delete.png';
+import './newOrder.css';
 
 const NewOrder = () => {
   const db = getFirestore();
+  const navigate = useNavigate();
   const [customerName, setCustomerName] = useState("");
   const [selectedProduct, setSelectedProduct] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -13,7 +17,6 @@ const NewOrder = () => {
   const [orderItems, setOrderItems] = useState([]);
 
   useEffect(() => {
-    // Fetch products from Firestore
     const fetchProducts = async () => {
       try {
         const querySnapshot = await getDocs(collection(db, "products"));
@@ -38,7 +41,6 @@ const NewOrder = () => {
       return;
     }
 
-    // Adiciona o produto ao pedido
     setOrderItems([
       ...orderItems,
       { productName: product.name, price: product.price, quantity }
@@ -48,129 +50,119 @@ const NewOrder = () => {
     setQuantity(1);
   };
 
-  const handleSubmitOrder = async () => {
+  const handleProceedToSummary = () => {
     if (!customerName || !orderDate || orderItems.length === 0) {
       setMessage("Por favor, preencha todos os campos e adicione pelo menos um produto.");
       return;
     }
 
-    try {
-      // Adiciona o pedido ao Firestore
-      await addDoc(collection(db, "orders"), {
-        customerName,
-        orderDate,
-        items: orderItems,
-        createdAt: new Date()
-      });
+    // Salva os dados no localStorage ou em algum outro lugar para acessar na página de resumo
+    localStorage.setItem("orderSummary", JSON.stringify({
+      customerName,
+      orderDate,
+      items: orderItems
+    }));
 
-      setMessage("Pedido cadastrado com sucesso!");
-      // Limpar o formulário após o envio
-      setCustomerName("");
-      setOrderDate("");
-      setOrderItems([]);
-    } catch (error) {
-      setMessage(`Erro ao cadastrar pedido: ${error.message}`);
-    }
+    navigate('/orderSummary');
   };
 
   return (
-    <div>
-      <div className="container">
-        <h1>Cadastro de Pedidos</h1>
-        <form id="orderForm">
-          <label>Nome do Cliente:</label>
+    <div className="new-order-page">
+      <h1>Cadastro de Pedidos</h1>
+      <form id="orderForm">
+        <label>Nome do Cliente:</label>
+        <input
+          type="text"
+          id="customerName"
+          name="customerName"
+          value={customerName}
+          onChange={(e) => setCustomerName(e.target.value)}
+          required
+        />
+
+        <div className="product-selection">
+          <label>Produto:</label>
+          <select
+            id="product"
+            name="product"
+            value={selectedProduct}
+            onChange={(e) => setSelectedProduct(e.target.value)}
+          >
+            <option value="">Selecione um produto</option>
+            {products.map(product => (
+              <option key={product.id} value={product.name}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+
+          <label>Quantidade:</label>
           <input
-            type="text"
-            id="customerName"
-            name="customerName"
-            value={customerName}
-            onChange={(e) => setCustomerName(e.target.value)}
+            type="number"
+            id="quantity"
+            name="quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+            min="1"
             required
           />
 
-          <div className="product-selection">
-            <label>Produto:</label>
-            <select
-              id="product"
-              name="product"
-              value={selectedProduct}
-              onChange={(e) => setSelectedProduct(e.target.value)}
-            >
-              <option value="">Selecione um produto</option>
-              {products.map(product => (
-                <option key={product.id} value={product.name}>
-                  {product.name}
-                </option>
-              ))}
-            </select>
-
-            <label>Quantidade:</label>
-            <input
-              type="number"
-              id="quantity"
-              name="quantity"
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              min="1"
-              required
-            />
-
-            <button
-              type="button"
-              className="add-product-btn"
-              onClick={handleAddProduct}
-            >
-              Adicionar Produto
-            </button>
-          </div>
-
-          <table id="productTable">
-            <thead>
-              <tr>
-                <th>Produto</th>
-                <th>Preço Unitário</th>
-                <th>Quantidade</th>
-                <th>Total</th>
-                <th>Ações</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orderItems.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.productName}</td>
-                  <td>R$ {item.price.toFixed(2)}</td>
-                  <td>{item.quantity}</td>
-                  <td>R$ {(item.price * item.quantity).toFixed(2)}</td>
-                  <td>
-                    <button
-                      type="button"
-                      onClick={() => setOrderItems(orderItems.filter((_, i) => i !== index))}
-                    >
-                      Remover
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <label>Data do Pedido:</label>
-          <input
-            type="date"
-            id="orderDate"
-            name="orderDate"
-            value={orderDate}
-            onChange={(e) => setOrderDate(e.target.value)}
-            required
-          />
-
-          <button type="button" className="saveOrder" onClick={handleSubmitOrder}>
-            Cadastrar Pedido
+          <button
+            type="button"
+            className="add-product-btn"
+            onClick={handleAddProduct}
+          >
+            Adicionar Produto
           </button>
+        </div>
 
-          {message && <p className="message">{message}</p>}
-        </form>
-      </div>
+        <table id="productTable">
+          <thead>
+            <tr>
+              <th>Produto</th>
+              <th>Preço Unitário</th>
+              <th>Quantidade</th>
+              <th>Total</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orderItems.map((item, index) => (
+              <tr key={index}>
+                <td>{item.productName}</td>
+                <td>R$ {item.price.toFixed(2)}</td>
+                <td>{item.quantity}</td>
+                <td>R$ {(item.price * item.quantity).toFixed(2)}</td>
+                <td>
+                  <button
+                    type="button"
+                    onClick={() => setOrderItems(orderItems.filter((_, i) => i !== index))}
+                    className="delete-button"
+                  >
+                    <img src={trashIcon} alt="Lixeira" className="icon"/>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <label>Data do Pedido:</label>
+        <input
+          type="date"
+          id="orderDate"
+          name="orderDate"
+          value={orderDate}
+          onChange={(e) => setOrderDate(e.target.value)}
+          required
+        />
+
+        <button type="button" className="proceed-summary" onClick={handleProceedToSummary}>
+          Ir para Resumo do Pedido
+        </button>
+
+        {message && <p className="message">{message}</p>}
+      </form>
     </div>
   );
 };
