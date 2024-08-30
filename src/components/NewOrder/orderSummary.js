@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getFirestore, collection, addDoc, updateDoc, doc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { getAuth } from 'firebase/auth'; // Importe o Firebase Auth
 import { useNavigate } from 'react-router-dom';
 import './orderSummary.css';
 
@@ -9,6 +10,7 @@ const DELIVERY_FEE = 15.00; // Defina a taxa de entrega aqui
 const OrderSummary = () => {
   const db = getFirestore();
   const storage = getStorage();
+  const auth = getAuth(); // Inicialize o Firebase Auth
   const navigate = useNavigate();
   const [paymentProof, setPaymentProof] = useState(null);
   const [message, setMessage] = useState("");
@@ -23,6 +25,12 @@ const OrderSummary = () => {
   const handleSubmitOrder = async () => {
     if (!paymentProof) {
       setMessage("Por favor, envie o comprovante de pagamento.");
+      return;
+    }
+
+    const user = auth.currentUser; // Verifique o usuário autenticado
+    if (!user) {
+      setMessage("Usuário não autenticado. Por favor, faça login.");
       return;
     }
 
@@ -44,11 +52,6 @@ const OrderSummary = () => {
 
       // Adicionar o pedido ao Firestore e obter o ID do documento
       const orderDocRef = await addDoc(collection(db, "orders"), orderData);
-
-      // Atualiza o pedido com o status
-      await updateDoc(doc(db, "orders", orderDocRef.id), {
-        status: 'pago'
-      });
 
       setMessage("Pedido cadastrado com sucesso!");
       localStorage.removeItem("orderSummary"); // Limpar o resumo do pedido
